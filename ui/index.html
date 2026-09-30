@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regression Guard - AI Regression Test Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="brand">
+        <div class="brand-logo">🛡️</div>
+        <div class="brand-title">
+          <h1>Regression Guard</h1>
+          <p>Automated Anti-Leakage AI Test Synthesis Engine</p>
+        </div>
+      </div>
+      <div class="status-badge" id="status-badge">
+        <div class="status-dot" id="status-dot"></div>
+        <span id="status-text">Connecting to Ollama...</span>
+      </div>
+    </header>
+
+    <!-- Main Grid -->
+    <div class="grid-layout">
+      <!-- Controls Panel -->
+      <div class="glass-card">
+        <div class="section-title">⚙️ Run Configuration</div>
+        <form id="config-form">
+          <div class="form-group">
+            <label for="repo">Git Repository Path / Name</label>
+            <input type="text" id="repo" class="form-control" value="humanize" required>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="buggy">Buggy Commit</label>
+              <input type="text" id="buggy" class="form-control" value="7574e0c" required>
+            </div>
+            <div class="form-group">
+              <label for="fixed">Fixed Commit</label>
+              <input type="text" id="fixed" class="form-control" value="823ad60" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="test-file">Target Test File</label>
+            <input type="text" id="test-file" class="form-control" value="tests/test_filesize.py" required>
+          </div>
+
+          <div class="form-group">
+            <label for="model">LLM Model (Ollama)</label>
+            <select id="model" class="form-control">
+              <option value="llama3.2">llama3.2 (Loading...)</option>
+            </select>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="timeout">Timeout (Sec)</label>
+              <input type="number" id="timeout" class="form-control" value="180">
+            </div>
+            <div class="form-group">
+              <label for="max-attempts">Max Attempts</label>
+              <input type="number" id="max-attempts" class="form-control" value="3">
+            </div>
+          </div>
+
+          <button type="submit" id="btn-run" class="btn-primary">
+            <span>⚡ Run Regression Guard</span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Execution Panel -->
+      <div class="glass-card">
+        <!-- Stepper Progress Bar -->
+        <div class="stepper-container">
+          <div class="step-item" id="step-1">
+            <div class="step-icon">1</div>
+            <div class="step-label">Setup</div>
+          </div>
+          <div class="step-item" id="step-2">
+            <div class="step-icon">2</div>
+            <div class="step-label">Diffs</div>
+          </div>
+          <div class="step-item" id="step-3">
+            <div class="step-icon">3</div>
+            <div class="step-label">Confirm</div>
+          </div>
+          <div class="step-item" id="step-4">
+            <div class="step-icon">4</div>
+            <div class="step-label">AI Gen</div>
+          </div>
+          <div class="step-item" id="step-5">
+            <div class="step-icon">5</div>
+            <div class="step-label">Report</div>
+          </div>
+        </div>
+
+        <!-- Output Tabs -->
+        <div class="tabs-header">
+          <button class="tab-btn active" data-tab="terminal-tab">Terminal Logs</button>
+          <button class="tab-btn" data-tab="code-tab">Accepted Pytest Test</button>
+          <button class="tab-btn" data-tab="report-tab">Markdown Report</button>
+        </div>
+
+        <!-- Terminal Logs Tab -->
+        <div id="terminal-tab" class="tab-content active">
+          <div class="terminal-window" id="terminal-output">
+            <div class="terminal-line highlight">System ready. Click "Run Regression Guard" to start execution.</div>
+          </div>
+        </div>
+
+        <!-- Accepted Test Tab -->
+        <div id="code-tab" class="tab-content">
+          <div class="code-container">
+            <button class="btn-copy" id="btn-copy">📋 Copy Code</button>
+            <pre><code id="code-output"># Accepted test will appear here after verification...</code></pre>
+          </div>
+        </div>
+
+        <!-- Report Tab -->
+        <div id="report-tab" class="tab-content">
+          <div class="markdown-body" id="report-output">
+            <p style="color: var(--text-muted)">Report will be rendered here upon completion...</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
