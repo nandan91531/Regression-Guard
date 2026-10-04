@@ -5,7 +5,7 @@
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![Test Suite](https://img.shields.io/badge/pytest-passing-brightgreen.svg)](https://docs.pytest.org/)
 [![LLM Powered](https://img.shields.io/badge/LLM-Ollama%20%2F%20Llama%203.2-orange.svg)](https://ollama.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENCE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 Repository: [https://github.com/nandan91531/Regression-Guard.git](https://github.com/nandan91531/Regression-Guard.git)
 
